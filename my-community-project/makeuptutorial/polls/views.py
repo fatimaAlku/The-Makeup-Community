@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import os
 
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -135,7 +136,19 @@ class ProductBrowse(ListView):
             "price_desc": "-price",
             "name": "name",
         }
-        return qs.order_by(sort_map.get(sort, "-id"))
+        ordered = list(qs.order_by(sort_map.get(sort, "-id")))
+
+        # Filter out products whose image file does not exist
+        def has_image_file(prod: Product) -> bool:
+            url = (prod.image_url or "").strip()
+            if not url or not url.startswith("/static/"):
+                return False
+            # Map '/static/...' -> polls/static/...
+            static_rel = url.split("/static/", 1)[1]
+            abs_path = os.path.join(os.path.dirname(__file__), "static", static_rel)
+            return os.path.exists(abs_path)
+
+        return [p for p in ordered if has_image_file(p)]
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
@@ -208,7 +221,17 @@ class TrendsView(ListView):
         if cat:
             qs = qs.filter(category=cat)
 
-        return qs.order_by("-trending_score", "-recent_reviews", "-id")
+        ordered = list(qs.order_by("-trending_score", "-recent_reviews", "-id"))
+
+        def has_image_file(prod: Product) -> bool:
+            url = (prod.image_url or "").strip()
+            if not url or not url.startswith("/static/"):
+                return False
+            static_rel = url.split("/static/", 1)[1]
+            abs_path = os.path.join(os.path.dirname(__file__), "static", static_rel)
+            return os.path.exists(abs_path)
+
+        return [p for p in ordered if has_image_file(p)]
 
     
     def get_context_data(self, **kwargs):
