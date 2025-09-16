@@ -316,6 +316,13 @@ PRODUCTS = [
         "price": 49,
         "image_url": "/static/img/products/Summer Fridays — Jet Lag Mask.jpg",
     },
+    {
+        "brand": "NARS",
+        "name": "Buttermelt Blush",
+        "category": "blush",
+        "price": 34,
+        "image_url": "/static/img/products/Nars - Buttermelt Blush.jpg",
+    },
 ]
 
 REVIEW_SNIPPETS = [
