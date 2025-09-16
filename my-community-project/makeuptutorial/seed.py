@@ -55,28 +55,28 @@ PRODUCTS = [
         "name": "Stunna Lip Paint in Uncensored",
         "category": "lipstick",
         "price": 25,
-        "image_url": "/static/img/products/fenty beauty Stunna lip paint in uncensored.jpg",
+        "image_url": "/static/img/products/Fenty Beauty — Stunna Lip Paint in Uncensored.jpg",
     },
     {
         "brand": "Rare Beauty",
         "name": "Liquid Lipstick in Brave",
         "category": "lipstick",
         "price": 22,
-        "image_url": "/static/img/products/luxe beauty velvet matte lipstick in ruby red.avif",
+        "image_url": "/static/img/products/Rare Beauty — Liquid Lipstick in Brave.webp",
     },
     {
         "brand": "Glossier",
         "name": "Generation G Matte Lipstick in Cake",
         "category": "lipstick",
         "price": 18,
-        "image_url": "/static/img/products/luxe beauty velvet matte lipstick in ruby red.avif",
+        "image_url": "/static/img/products/Glossier — Generation G Matte Lipstick in Cake.png",
     },
     {
         "brand": "Charlotte Tilbury",
         "name": "Pillow Talk Lipstick",
         "category": "lipstick",
         "price": 35,
-        "image_url": "/static/img/products/luxe beauty velvet matte lipstick in ruby red.avif",
+        "image_url": "/static/img/products/Charlotte Tilbury — Pillow Talk Lipstick.webp",
     },
     
     # Trending Foundation & Base
@@ -85,28 +85,28 @@ PRODUCTS = [
         "name": "Pro Filt'r Soft Matte Foundation",
         "category": "foundation",
         "price": 38,
-        "image_url": "/static/img/products/rare beauty soft pinch liquid blush.webp",
+        "image_url": "/static/img/products/Fenty Beauty — Pro Filt'r Soft Matte Foundation.webp",
     },
     {
         "brand": "Rare Beauty",
         "name": "Liquid Touch Weightless Foundation",
         "category": "foundation",
         "price": 29,
-        "image_url": "/static/img/products/rare beauty soft pinch liquid blush.webp",
+        "image_url": "/static/img/products/Rare Beauty — Liquid Touch Weightless Foundation.webp",
     },
     {
         "brand": "NARS",
         "name": "Light Reflecting Foundation",
         "category": "foundation",
         "price": 50,
-        "image_url": "/static/img/products/rare beauty soft pinch liquid blush.webp",
+        "image_url": "/static/img/products/NARS — Light Reflecting Foundation.avif",
     },
     {
         "brand": "Glossier",
         "name": "Perfecting Skin Tint",
         "category": "foundation",
         "price": 26,
-        "image_url": "/static/img/products/rare beauty soft pinch liquid blush.webp",
+        "image_url": "/static/img/products/Glossier — Perfecting Skin Tint.jpeg",
     },
     
     # Trending Eyeshadow Palettes
@@ -115,28 +115,28 @@ PRODUCTS = [
         "name": "Modern Renaissance Palette",
         "category": "eyeshadow",
         "price": 45,
-        "image_url": "/static/img/products/color dreams sunset eyeshadow palette.webp",
+        "image_url": "/static/img/products/Anastasia Beverly Hills — Modern Renaissance Palette.jpg",
     },
     {
         "brand": "Urban Decay",
         "name": "Naked Heat Eyeshadow Palette",
         "category": "eyeshadow",
         "price": 54,
-        "image_url": "/static/img/products/color dreams sunset eyeshadow palette.webp",
+        "image_url": "/static/img/products/Urban Decay — Naked Heat Eyeshadow Palette.jpg",
     },
     {
         "brand": "Huda Beauty",
         "name": "Desert Dusk Eyeshadow Palette",
         "category": "eyeshadow",
         "price": 65,
-        "image_url": "/static/img/products/color dreams sunset eyeshadow palette.webp",
+        "image_url": "/static/img/products/Huda Beauty — Desert Dusk Eyeshadow Palette.avif",
     },
     {
         "brand": "Morphe",
         "name": "35O2 Second Nature Eyeshadow Palette",
         "category": "eyeshadow",
         "price": 25,
-        "image_url": "/static/img/products/color dreams sunset eyeshadow palette.webp",
+        "image_url": "/static/img/products/Morphe — 35O2 Second Nature Eyeshadow Palette.webp",
     },
     
     # Trending Mascara & Lashes
@@ -145,28 +145,28 @@ PRODUCTS = [
         "name": "Better Than Sex Mascara",
         "category": "mascara",
         "price": 26,
-        "image_url": "/static/img/products/lash paradise mascara loreal.avif",
+        "image_url": "/static/img/products/Too Faced — Better Than Sex Mascara.avif",
     },
     {
         "brand": "Benefit Cosmetics",
         "name": "They're Real! Mascara",
         "category": "mascara",
         "price": 25,
-        "image_url": "/static/img/products/lash paradise mascara loreal.avif",
+        "image_url": "/static/img/products/Benefit Cosmetics — They're Real! Mascara.avif",
     },
     {
         "brand": "L'Oréal",
         "name": "Lash Paradise Mascara",
         "category": "mascara",
         "price": 12,
-        "image_url": "/static/img/products/lash paradise mascara loreal.avif",
+        "image_url": "/static/img/products/L'Oréal — Lash Paradise Mascara.jpg",
     },
     {
         "brand": "Maybelline",
         "name": "Sky High Mascara",
         "category": "mascara",
         "price": 9,
-        "image_url": "/static/img/products/lash paradise mascara loreal.avif",
+        "image_url": "/static/img/products/Maybelline — Sky High Mascara.webp",
     },
     
     # Trending Concealer & Corrector
@@ -175,21 +175,21 @@ PRODUCTS = [
         "name": "Shape Tape Concealer",
         "category": "concealer",
         "price": 27,
-        "image_url": "/static/img/products/rare beauty soft pinch liquid blush.webp",
+        "image_url": "/static/img/products/Tarte — Shape Tape Concealer.jpg",
     },
     {
         "brand": "NARS",
         "name": "Radiant Creamy Concealer",
         "category": "concealer",
         "price": 32,
-        "image_url": "/static/img/products/rare beauty soft pinch liquid blush.webp",
+        "image_url": "/static/img/products/NARS — Radiant Creamy Concealer.avif",
     },
     {
         "brand": "Fenty Beauty",
         "name": "Pro Filt'r Instant Retouch Concealer",
         "category": "concealer",
         "price": 25,
-        "image_url": "/static/img/products/rare beauty soft pinch liquid blush.webp",
+        "image_url": "/static/img/products/Fenty Beauty — Pro Filt'r Instant Retouch Concealer.avif",
     },
     
     # Trending Blush & Highlighter
@@ -198,28 +198,28 @@ PRODUCTS = [
         "name": "Soft Pinch Liquid Blush",
         "category": "blush",
         "price": 20,
-        "image_url": "/static/img/products/rare beauty soft pinch liquid blush.webp",
+        "image_url": "/static/img/products/Rare Beauty — Soft Pinch Liquid Blush.webp",
     },
     {
         "brand": "Fenty Beauty",
         "name": "Cheeks Out Freestyle Cream Blush",
         "category": "blush",
         "price": 22,
-        "image_url": "/static/img/products/rare beauty soft pinch liquid blush.webp",
+        "image_url": "/static/img/products/Fenty Beauty — Cheeks Out Freestyle Cream Blush.jpg",
     },
     {
         "brand": "Glossier",
         "name": "Cloud Paint in Puff",
         "category": "blush",
         "price": 18,
-        "image_url": "/static/img/products/rare beauty soft pinch liquid blush.webp",
+        "image_url": "/static/img/products/Glossier — Cloud Paint in Puff.jpg",
     },
     {
         "brand": "Fenty Beauty",
         "name": "Killawatt Freestyle Highlighter",
         "category": "highlighter",
         "price": 38,
-        "image_url": "/static/img/products/rare beauty soft pinch liquid blush.webp",
+        "image_url": "/static/img/products/Fenty Beauty — Killawatt Freestyle Highlighter.webp",
     },
     
     # Trending Skincare-Makeup Hybrids
@@ -228,21 +228,21 @@ PRODUCTS = [
         "name": "Futuredew Oil-Serum Hybrid",
         "category": "skincare",
         "price": 24,
-        "image_url": "/static/img/products/rare beauty soft pinch liquid blush.webp",
+        "image_url": "/static/img/products/Glossier — Futuredew Oil-Serum Hybrid.png",
     },
     {
         "brand": "Rare Beauty",
         "name": "Always an Optimist 4-in-1 Prime & Set Mist",
         "category": "skincare",
         "price": 22,
-        "image_url": "/static/img/products/rare beauty soft pinch liquid blush.webp",
+        "image_url": "/static/img/products/Rare Beauty — Always an Optimist 4-in-1 Prime & Set Mist.webp",
     },
     {
         "brand": "Fenty Beauty",
         "name": "Pro Filt'r Instant Retouch Setting Powder",
         "category": "powder",
         "price": 32,
-        "image_url": "/static/img/products/rare beauty soft pinch liquid blush.webp",
+        "image_url": "/static/img/products/Fenty Beauty — Pro Filt'r Instant Retouch Setting Powder.jpg",
     },
 ]
 
@@ -320,8 +320,21 @@ def create_products():
             name=p["name"],
             defaults=p
         )
-        msg = "✅ Created" if created else "⚠️  Exists"
-        print(f"  {msg}: {obj}")
+        if created:
+            print(f"  ✅ Created: {obj}")
+        else:
+            # Ensure existing records get the latest brand/category/price/image_url
+            updated = False
+            for field in ["brand", "category", "price", "image_url"]:
+                new_val = p[field]
+                if getattr(obj, field) != new_val:
+                    setattr(obj, field, new_val)
+                    updated = True
+            if updated:
+                obj.save(update_fields=["brand", "category", "price", "image_url"])
+                print(f"  🔄 Updated: {obj}")
+            else:
+                print(f"  ⚠️  Exists (no changes): {obj}")
 
 def create_reviews():
     print("→ Seeding reviews…")
