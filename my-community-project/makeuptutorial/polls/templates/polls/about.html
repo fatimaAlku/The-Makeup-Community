@@ -1,0 +1,237 @@
+{% extends "polls/base.html" %}
+{% block title %}About Us · The Makeup Community{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="about-hero">
+  <div class="hero-content">
+    <h1>About The Makeup Community</h1>
+    <p class="hero-description">
+      We're the ultimate platform for honest makeup product reviews. Our community of beauty enthusiasts 
+      shares real experiences, detailed wear tests, and honest opinions to help you find products that 
+      actually work for <em>you</em>. No sponsored content, no fake reviews—just authentic experiences 
+      from real people who love makeup.
+    </p>
+    <div class="hero-features">
+      <div class="feature-highlight">
+        <span>Honest Reviews</span>
+      </div>
+      <div class="feature-highlight">
+        <span>Community Driven</span>
+      </div>
+      <div class="feature-highlight">
+        <span>Detailed Testing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mission & Vision -->
+<section class="mission-vision">
+  <div class="mission-card">
+    
+    <h2>Our Mission</h2>
+    <p>To create a trusted space where beauty enthusiasts can share authentic experiences and help each other discover products that truly work. We believe in transparency, honesty, and the power of community-driven recommendations.</p>
+  </div>
+  <div class="vision-card">
+    
+    <h2>Our Vision</h2>
+    <p>To become the world's most trusted makeup review platform, where every beauty decision is informed by real experiences from a diverse, engaged community of makeup lovers.</p>
+  </div>
+</section>
+
+<!-- Statistics -->
+<section class="about-kpis">
+  <div class="kpi">
+    <span class="num">{{ kpi_products|default:"500+" }}</span>
+    <span class="label">Products Reviewed</span>
+  </div>
+  <div class="kpi">
+    <span class="num">{{ kpi_reviews|default:"2,000+" }}</span>
+    <span class="label">Honest Reviews</span>
+  </div>
+  <div class="kpi">
+    <span class="num">{{ kpi_users|default:"1,000+" }}</span>
+    <span class="label">Active Reviewers</span>
+  </div>
+  <div class="kpi">
+    <span class="num">98%</span>
+    <span class="label">Satisfaction Rate</span>
+  </div>
+</section>
+
+<!-- Core Values -->
+<section class="values-section">
+  <h2>Our Core Values</h2>
+  <div class="values-grid">
+    <div class="value-card">
+     
+      <h3>Authenticity</h3>
+      <p>Every review comes from real users with verified purchases. No fake reviews, no sponsored content, no hidden agendas.</p>
+    </div>
+    <div class="value-card">
+     
+      <h3>Inclusivity</h3>
+      <p>We celebrate all skin tones, types, ages, and beauty preferences. Everyone deserves to find products that work for them.</p>
+    </div>
+    <div class="value-card">
+     
+      <h3>Community</h3>
+      <p>We're built by beauty lovers, for beauty lovers. Every member contributes to making better beauty decisions for everyone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="about-how">
+  <h2>How Our Platform Works</h2>
+  <div class="steps-container">
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3>Join Our Community</h3>
+        <p>Create your profile and set your beauty preferences (skin type, tone, undertone, age range) to get personalized recommendations.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3>Discover Products</h3>
+        <p>Browse our extensive database of makeup products with real user reviews, ratings, and detailed wear test results.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3>Write Honest Reviews</h3>
+        <p>Share your experience with detailed reviews, photos, wear test results, and honest pros and cons to help others.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h3>Help Others Decide</h3>
+        <p>Vote on helpful reviews, ask questions, and help fellow beauty enthusiasts make informed purchasing decisions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features-section">
+  <h2>What Makes Us Different</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      
+      <h3>Advanced Filtering</h3>
+      <p>Filter by brand, category, price, rating, skin type, undertone, and more to find products that match your specific needs.</p>
+    </div>
+    <div class="feature-card">
+      
+      <h3>Real Wear Tests</h3>
+      <p>Track how products perform throughout the day with time-based check-ins showing wear, creasing, fading, and longevity.</p>
+    </div>
+    <div class="feature-card">
+      
+      <h3>Visual Reviews</h3>
+      <p>See real swatches, before/after photos, and application videos from actual users, not professional models.</p>
+    </div>
+    <div class="feature-card">
+      
+      <h3>Personalized Recommendations</h3>
+      <p>Get product suggestions based on your beauty profile, past reviews, and similar users' preferences.</p>
+    </div>
+    <div class="feature-card">
+      
+      <h3>Verified Purchases</h3>
+      <p>All reviews are marked with purchase verification to ensure authenticity and prevent fake reviews.</p>
+    </div>
+    <div class="feature-card">
+     
+      <h3>Community Q&A</h3>
+      <p>Ask questions about products, get advice from experienced users, and share your beauty knowledge.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <h2>What Our Community Says</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-content">
+        <p>"Finally, a platform where I can trust the reviews! The wear tests are incredibly helpful and have saved me from so many disappointing purchases."</p>
+      </div>
+      <div class="testimonial-author">
+        <strong>Sarah M.</strong>
+        <span>Beauty Blogger</span>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-content">
+        <p>"The filtering system is amazing. I can find products specifically for my skin type and undertone. It's like having a personal beauty consultant!"</p>
+      </div>
+      <div class="testimonial-author">
+        <strong>Maria L.</strong>
+        <span>Makeup Enthusiast</span>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-content">
+        <p>"I love how detailed the reviews are. People actually test products for weeks and share honest feedback. This is exactly what the beauty community needed."</p>
+      </div>
+      <div class="testimonial-author">
+        <strong>Jessica K.</strong>
+        <span>Professional MUA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <h3>Are all reviews verified?</h3>
+      <p>Yes! We verify purchases through receipt uploads and cross-reference with purchase data to ensure all reviews are from genuine buyers.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How do you prevent fake reviews?</h3>
+      <p>We use multiple verification methods including purchase verification, user behavior analysis, and community reporting to maintain review integrity.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can I review products I didn't buy?</h3>
+      <p>We encourage reviews from purchased products only. However, you can share experiences from samples or gifts if clearly marked in your review.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How do wear tests work?</h3>
+      <p>Wear tests track product performance over time with check-ins at 2, 4, 6, and 8+ hours, documenting wear, fading, creasing, and overall longevity.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Is this platform free to use?</h3>
+      <p>Yes! Our platform is completely free for users. We're supported by affiliate partnerships that don't influence our review policies.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How can I get my products reviewed?</h3>
+      <p>We don't accept paid reviews or sponsored content. Products get reviewed when our community members purchase and test them organically.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="about-contact">
+  <div class="contact-content">
+    <h2>Get in Touch</h2>
+   
+    <div class="contact-methods">
+      <div class="contact-method">
+        <div>
+          <h3>Email Us</h3>
+          <p><a href="mailto:info@themakeupcommunity">info@themakeupcommunity</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

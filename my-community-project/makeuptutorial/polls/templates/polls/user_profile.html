@@ -1,0 +1,151 @@
+{% extends "polls/base.html" %}
+{% block title %}My Profile · The Makeup Community{% endblock %}
+
+{% block content %}
+<article class="wrap" style="padding-top:24px">
+  <!-- Profile Header -->
+  <div class="profile-header" style="background: linear-gradient(135deg, #ffffff 0%, #fff5f5 50%, #ffe4e1 100%); border-radius: var(--radius-xl); padding: var(--space-lg); margin-bottom: var(--space-lg); text-align: left;">
+    <div class="profile-avatar" style="width: 60px; height: 60px; background: var(--gradient-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 0 var(--space-sm); font-size: 1.4rem; color: white; font-weight: bold;">
+      {{ user.username|first|upper }}
+    </div>
+    <h1 style="margin: 0 0 var(--space-xs); font-size: 1.6rem; background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">{{ user.username }}</h1>
+    
+    <!-- Profile Stats -->
+    <div class="profile-stats" style="display: flex; justify-content: flex-start; gap: var(--space-lg); margin-top: var(--space-md);">
+      <div class="stat-item" style="text-align: left;">
+        <div style="font-size: 1.6rem; font-weight: bold; color: var(--ink);">{{ total_reviews }}</div>
+        <div style="color: var(--muted); font-size: 0.85rem;">Reviews Written</div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Badges Section -->
+    <section class="badges-section" style="margin-bottom: var(--space-2xl);">
+      <h2 style="margin: 0 0 var(--space-lg); font-size: 1.8rem; color: var(--ink);">My Badges</h2>
+      <div class="card" style="padding: var(--space-lg);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-md);">
+          <div class="badge-card earned" style="border: 1px solid rgba(255, 215, 0, 0.3); border-radius: var(--radius-md); padding: var(--space-md); text-align: center; background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 215, 0, 0.02) 100%);">
+            <div style="font-size: 2.5rem; margin-bottom: var(--space-sm);">🏆</div>
+            <h3 style="margin: 0 0 var(--space-xs); font-size: 1rem;">Foundation Explorer</h3>
+            <p style="margin: 0 0 var(--space-sm); color: var(--muted); font-size: 0.85rem;">Reviewed 10 foundations</p>
+            <span style="background: #10b981; color: white; padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: bold;">Earned</span>
+          </div>
+          <div class="badge-card earned" style="border: 1px solid rgba(255, 215, 0, 0.3); border-radius: var(--radius-md); padding: var(--space-md); text-align: center; background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 215, 0, 0.02) 100%);">
+            <div style="font-size: 2.5rem; margin-bottom: var(--space-sm);">💋</div>
+            <h3 style="margin: 0 0 var(--space-xs); font-size: 1rem;">Lipstick Legend</h3>
+            <p style="margin: 0 0 var(--space-sm); color: var(--muted); font-size: 0.85rem;">Expert in lip products</p>
+            <span style="background: #10b981; color: white; padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: bold;">Earned</span>
+          </div>
+          <div class="badge-card locked" style="border: 1px solid var(--line-light); border-radius: var(--radius-md); padding: var(--space-md); text-align: center; opacity: 0.7;">
+            <div style="font-size: 2.5rem; margin-bottom: var(--space-sm); filter: grayscale(100%); opacity: 0.5;">⭐</div>
+            <h3 style="margin: 0 0 var(--space-xs); font-size: 1rem;">Review Rockstar</h3>
+            <p style="margin: 0 0 var(--space-sm); color: var(--muted); font-size: 0.85rem;">Write 50 reviews</p>
+            <span style="background: var(--line-light); color: var(--muted); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); font-size: 0.8rem;">Locked</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+      <div style="margin-bottom: var(--space-lg);">
+        <h2 style="margin: 0; font-size: 1.8rem; color: var(--ink);">My Reviews</h2>
+        <p style="color: var(--muted); margin: var(--space-xs) 0 0;">All the reviews you've written</p>
+      </div>
+    
+    <!-- Reviews List -->
+    <div class="reviews-list">
+      {% for review in reviews %}
+        <div class="review-card card" style="margin: var(--space-md) 0; padding: var(--space-lg); position: relative;">
+          <!-- Review Header -->
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-md);">
+            <div style="flex: 1;">
+              <h3 style="margin: 0 0 var(--space-xs); font-size: 1.2rem;">
+                <a href="{% url 'product-detail' review.product.pk %}" style="color: var(--ink); text-decoration: none;">
+                  {{ review.product.brand }} {{ review.product.name }}
+                </a>
+              </h3>
+              <h4 style="margin: 0 0 var(--space-xs); font-size: 1rem; color: var(--ink-secondary);">{{ review.title }}</h4>
+              <div style="display: flex; align-items: center; gap: var(--space-sm); color: var(--muted); font-size: 0.9rem;">
+                <div style="display: flex; gap: 2px;">
+                  {% for i in "12345" %}
+                    <span class="star-rating {% if forloop.counter <= review.rating %}filled{% else %}empty{% endif %}">★</span>
+                  {% endfor %}
+                </div>
+                <span>{{ review.rating }}/5</span>
+                <span>•</span>
+                <span>{{ review.created_at|date:"M d, Y" }}</span>
+                {% if review.is_verified_purchase %}
+                  <span style="color: var(--gradient-primary); font-weight: 500;">✓ Verified Purchase</span>
+                {% endif %}
+              </div>
+            </div>
+            
+            <!-- Review Actions -->
+            <div class="review-actions" style="display: flex; gap: var(--space-sm);">
+              <a class="btn-link" href="{% url 'review-update' review.pk %}" style="color: var(--ink); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); background: var(--surface);">Edit</a>
+              <a class="btn-link" href="{% url 'review-delete' review.pk %}" style="color: #ff6b6b; padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); background: var(--surface);">Delete</a>
+            </div>
+          </div>
+          
+          <!-- Review Body -->
+          <div style="color: var(--ink-secondary); line-height: 1.6; margin-bottom: var(--space-md);">
+            {{ review.body|linebreaksbr }}
+          </div>
+          
+          <!-- Review Metadata -->
+          {% if review.skin_type or review.skin_tone or review.age_range %}
+            <div style="display: flex; gap: var(--space-md); margin-bottom: var(--space-md); font-size: 0.8rem; color: var(--muted);">
+              {% if review.skin_type %}<span>Skin: {{ review.skin_type|title }}</span>{% endif %}
+              {% if review.skin_tone %}<span>Tone: {{ review.skin_tone|title }}</span>{% endif %}
+              {% if review.age_range %}<span>Age: {{ review.age_range }}</span>{% endif %}
+            </div>
+          {% endif %}
+          
+          <!-- Media -->
+          {% if review.media.all %}
+            <div style="display: flex; gap: var(--space-sm); margin: var(--space-md) 0; flex-wrap: wrap;">
+              {% for media in review.media.all %}
+                <a href="{{ media.file.url }}" target="_blank"
+                   style="width: 120px; height: 80px; display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden;">
+                  {% if media.kind == 'photo' %}
+                    <img src="{{ media.file.url }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                  {% else %}
+                    <span style="display: grid; place-items: center; width: 100%; height: 100%; color: var(--muted);">Video</span>
+                  {% endif %}
+                </a>
+              {% endfor %}
+            </div>
+          {% endif %}
+          
+          <!-- Wear Test -->
+          
+        </div>
+      {% empty %}
+        <div class="card" style="padding: var(--space-2xl); text-align: center;">
+          <h3 style="margin: 0 0 var(--space-sm); color: var(--muted);">No reviews yet</h3>
+          <p style="color: var(--muted); margin: 0 0 var(--space-lg);">Start reviewing products to see them here!</p>
+          <a class="primary" href="{% url 'products' %}">Browse Products</a>
+        </div>
+      {% endfor %}
+    </div>
+    
+    <!-- Pagination -->
+    {% if is_paginated %}
+      <div class="pagination" style="display: flex; justify-content: center; margin-top: var(--space-2xl);">
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}" class="btn-outline" style="margin-right: var(--space-sm);">Previous</a>
+        {% endif %}
+        
+        <span style="display: flex; align-items: center; margin: 0 var(--space-md); color: var(--muted);">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+        
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}" class="btn-outline" style="margin-left: var(--space-sm);">Next</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </section>
+</article>
+{% endblock %}

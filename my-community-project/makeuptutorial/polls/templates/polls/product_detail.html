@@ -1,0 +1,162 @@
+{% extends "polls/base.html" %}
+{% block title %}{{ object.brand }} {{ object.name }} · The Makeup Community{% endblock %}
+
+{% block content %}
+<article class="wrap" style="padding-top:24px">
+  <!-- Product Header -->
+  <div class="product-header" style="display:grid; grid-template-columns: 1fr 2fr; gap: 24px; margin-bottom: 32px;">
+    <div>
+      {% if object.image_url %}
+        <img src="{{ object.image_url }}" alt="{{ object.brand }} {{ object.name }}"
+             style="width:100%; border-radius:16px; border:1px solid var(--line)">
+      {% endif %}
+    </div>
+    
+    <div>
+      <h1 style="margin:0 0 8px; font-size: 2rem;">{{ object.brand }} {{ object.name }}</h1>
+      <p style="color:var(--muted);margin:0 0 16px; font-size: 1.1rem;">
+        {{ object.get_category_display }}{% if object.price %} • ${{ object.price|floatformat:0 }}{% endif %}
+      </p>
+      
+      <!-- Rating Summary -->
+      <div class="rating-summary" style="margin-bottom: 20px;">
+        <div style="display:flex; align-items:center; gap: 12px; margin-bottom: 8px;">
+          <div style="font-size: 2.5rem; font-weight: bold; color: var(--ink);">
+            {{ average_rating|floatformat:1 }}
+          </div>
+          <div>
+            <div style="display:flex; gap: 2px; margin-bottom: 4px;">
+              {% for i in "12345" %}
+                <span class="star-rating {% if forloop.counter <= average_rating %}filled{% else %}empty{% endif %}">★</span>
+              {% endfor %}
+            </div>
+            <div style="color: var(--muted); font-size: 0.9rem;">
+              Based on {{ review_count }} review{{ review_count|pluralize }}
+            </div>
+          </div>
+        </div>
+        
+        <!-- Rating Distribution -->
+        <div class="rating-distribution" style="font-size: 0.9rem;">
+          {% for rating_data in rating_distribution %}
+            <div style="display:flex; align-items:center; gap: 8px; margin-bottom: 4px;">
+              <span style="min-width: 20px;">{{ rating_data.rating }}</span>
+              <span style="color: gold;">★</span>
+              <div style="flex:1; height: 8px; background: var(--line-light); border-radius: 4px; overflow: hidden;">
+                <div class="rating-bar" style="height: 100%; background: var(--gradient-primary);" data-width="{% widthratio rating_data.count review_count 100 %}"></div>
+              </div>
+              <span style="min-width: 30px; text-align: right;">{{ rating_data.count }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+      <!-- Review Actions -->
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 20px; align-items:center;">
+        {% if user.is_authenticated %}
+          {% if user_has_reviewed %}
+            <!-- Single entry point: Write Review goes to edit when a review already exists -->
+            <a class="primary" href="{% url 'review-update' user_review.pk %}">Write Review</a>
+            <a class="btn-link" href="{% url 'review-delete' user_review.pk %}" style="color:#ff6b6b">Delete Your Review</a>
+          {% else %}
+            <a class="primary" href="{% url 'review-create' object.pk %}">Write Review</a>
+          {% endif %}
+        {% else %}
+          <a class="primary" href="{% url 'login' %}?next={% url 'review-create' object.pk %}">Write Review</a>
+        {% endif %}
+      </div>
+      
+      <!-- Product Description -->
+      {% if object.description %}
+        <div class="product-description" style="margin-top: 20px;">
+          <h3 style="margin: 0 0 8px;">Description</h3>
+          <p style="color: var(--muted); line-height: 1.6;">{{ object.description|linebreaksbr }}</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Reviews Section -->
+  <section class="reviews-section">
+    <div style="margin-bottom: 20px;">
+      <h2 style="margin:0;">Reviews</h2>
+    </div>
+    
+    <!-- Reviews List -->
+    <div class="reviews-list">
+      {% for r in recent_reviews %}
+        <div class="review-card card" style="margin:16px 0; padding:20px; position: relative;">
+          <!-- Review Header -->
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 12px;">
+            <div>
+              <h4 style="margin:0 0 4px; font-size: 1.1rem;">{{ r.title }}</h4>
+              <div style="display:flex; align-items:center; gap: 8px; color: var(--muted); font-size: 0.9rem;">
+                <span>{{ r.user.username }}</span>
+                <span>•</span>
+                <div style="display:flex; gap: 2px;">
+                  {% for i in "12345" %}
+                    <span class="star-rating {% if forloop.counter <= r.rating %}filled{% else %}empty{% endif %}">★</span>
+                  {% endfor %}
+                </div>
+                <span>{{ r.rating }}/5</span>
+                {% if r.is_verified_purchase %}
+                  <span style="color: var(--gradient-primary); font-weight: 500;">✓ Verified Purchase</span>
+                {% endif %}
+              </div>
+            </div>
+            
+            
+          </div>
+          
+          <!-- Review Body -->
+          <div style="color:var(--ink-secondary); line-height: 1.6; margin-bottom: 12px;">
+            {{ r.body|linebreaksbr }}
+          </div>
+          
+          <!-- Review Metadata -->
+          {% if r.skin_type or r.skin_tone or r.age_range %}
+            <div style="display:flex; gap: 12px; margin-bottom: 12px; font-size: 0.8rem; color: var(--muted);">
+              {% if r.skin_type %}<span>Skin: {{ r.skin_type|title }}</span>{% endif %}
+              {% if r.skin_tone %}<span>Tone: {{ r.skin_tone|title }}</span>{% endif %}
+              {% if r.age_range %}<span>Age: {{ r.age_range }}</span>{% endif %}
+            </div>
+          {% endif %}
+          
+          <!-- Media -->
+          {% if r.media.all %}
+            <div style="display:flex;gap:10px;margin:12px 0;flex-wrap:wrap">
+              {% for m in r.media.all %}
+                <a href="{{ m.file.url }}" target="_blank"
+                   style="width:120px;height:80px;display:block;border:1px solid var(--line);border-radius:8px;overflow:hidden;">
+                  {% if m.kind == 'photo' %}
+                    <img src="{{ m.file.url }}" alt="" style="width:100%;height:100%;object-fit:cover">
+                  {% else %}
+                    <span style="display:grid;place-items:center;width:100%;height:100%;color:var(--muted)">Video</span>
+                  {% endif %}
+                </a>
+              {% endfor %}
+            </div>
+          {% endif %}
+          
+          
+          
+          <!-- Review Actions -->
+          {% if user == r.user %}
+            <div class="review-actions" style="margin-top:12px; padding-top:12px; border-top: 1px solid var(--line-light);">
+              <a class="btn-link" href="{% url 'review-update' r.pk %}" style="color: var(--ink);">Edit</a>
+              <span style="color: var(--muted);">·</span>
+              <a class="btn-link" href="{% url 'review-delete' r.pk %}" style="color: var(--ink);">Delete</a>
+            </div>
+          {% endif %}
+        </div>
+      {% empty %}
+        <div class="card" style="padding:32px; text-align: center;">
+          <h3 style="margin:0 0 8px; color: var(--muted);">No reviews yet</h3>
+          <p style="color: var(--muted); margin:0;">Be the first to review this product!</p>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+</article>
+{% endblock %}
+

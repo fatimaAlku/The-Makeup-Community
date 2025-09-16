@@ -1,0 +1,19 @@
+{% extends "polls/base.html" %}
+{% block content %}
+<div style="min-height:70vh; display:flex; align-items:center; justify-content:center; padding-top:100px;">
+<section class="card" style="max-width:600px; width:100%; margin:0 auto; padding:20px; text-align:center; ">
+  <header style="border-left:4px solid #ff4f8a; padding-left:10px; margin-bottom:14px; text-align:left;">
+    <h2 style="margin:0;">Delete Review</h2>
+  </header>
+  <form method="post" class="review-form">{% csrf_token %}
+    <p style="color: var(--muted); margin-bottom:20px;">Are you sure you want to delete this?</p>
+    <div class="form-row">
+      <button class="primary" type="submit">Yes</button>
+    </div>
+    <div class="form-row" style="text-align:center;">
+      <a class="btn-cancel" href="javascript:history.back()">Cancel</a>
+    </div>
+  </form>
+</section>
+</div>
+{% endblock %}

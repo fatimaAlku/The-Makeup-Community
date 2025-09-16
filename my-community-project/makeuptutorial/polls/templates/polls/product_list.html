@@ -1,0 +1,10 @@
+{% extends "polls/base.html" %}
+{% block content %}
+<h2>Products</h2>
+<ul>
+  {% for p in object_list %}
+    <li><a href="{% url 'product-detail' p.pk %}">{{ p.brand }} {{ p.name }}</a>
+      <small>({{ p.get_category_display }})</small></li>
+  {% empty %}<li>No products yet.</li>{% endfor %}
+</ul>
+{% endblock %}

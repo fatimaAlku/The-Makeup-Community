@@ -1,0 +1,114 @@
+{% extends "polls/base.html" %}
+{% block title %}Product Reviews · The Makeup Community{% endblock %}
+
+{% block content %}
+<section class="reviews-hero">
+  <div class="hero-content">
+    <h1>Product Reviews</h1>
+    <p class="hero-description">Discover honest reviews from our community of makeup enthusiasts. Find the perfect products based on real experiences.</p>
+  </div>
+</section>
+
+<section class="reviews-filters">
+  <form class="filters" method="get" action="">
+    <div class="filter-group">
+      <input type="search" name="q" value="{{ q }}" placeholder="Search products or brands">
+    </div>
+    <div class="filter-group">
+      <select name="category">
+        <option value="">All categories</option>
+        {% for value,label in categories.items %}
+          <option value="{{ value }}" {% if selected_category == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filter-group">
+      <select name="sort">
+        <option value="rating"     {% if sort == 'rating' %}selected{% endif %}>Highest rated</option>
+        <option value="reviewed"   {% if sort == 'reviewed' %}selected{% endif %}>Most reviewed</option>
+        <option value="newest"     {% if sort == 'newest' %}selected{% endif %}>Recently added</option>
+        <option value="name"       {% if sort == 'name' %}selected{% endif %}>Name A–Z</option>
+      </select>
+    </div>
+    <div class="filter-actions">
+      <button type="submit" class="btn-primary">Filter Reviews</button>
+      <a class="btn-outline" href="{% url 'products' %}">Clear</a>
+    </div>
+  </form>
+</section>
+
+<section class="reviews-grid">
+  {% for p in object_list %}
+    <article class="review-card">
+      <div class="product-image">
+        <a href="{% url 'product-detail' p.pk %}">
+          {% if p.image_url %}
+            <img src="{{ p.image_url }}" alt="{{ p.brand }} {{ p.name }}" loading="lazy">
+          {% else %}
+            <div class="image-placeholder">
+              <svg viewBox="0 0 24 24" class="placeholder-icon">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+          {% endif %}
+        </a>
+      </div>
+      
+      <div class="review-content">
+        <div class="product-info">
+          <span class="brand-name">{{ p.brand }}</span>
+          <h3 class="product-name">
+            <a href="{% url 'product-detail' p.pk %}">{{ p.name }}</a>
+          </h3>
+          <span class="category-badge">{{ p.get_category_display }}</span>
+        </div>
+        
+        <div class="review-stats">
+          <div class="rating-section">
+            <div class="stars">
+              {% for i in "12345" %}
+                <svg viewBox="0 0 24 24" class="star {% if forloop.counter <= p.avg_rating|floatformat:0 %}filled{% endif %}">
+                  <path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/>
+                </svg>
+              {% endfor %}
+            </div>
+            <span class="rating-text">{{ p.avg_rating|default:"No rating"|floatformat:1 }}</span>
+          </div>
+          
+          <div class="review-count">
+            <svg viewBox="0 0 24 24" class="review-icon">
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+            </svg>
+            <span>{{ p.reviews_count|default:0 }} review{{ p.reviews_count|default:0|pluralize }}</span>
+          </div>
+        </div>
+        
+        <div class="card-actions">
+          <a href="{% url 'product-detail' p.pk %}" class="btn-primary">Read Reviews</a>
+          <a href="{% url 'review-create' p.pk %}" class="btn-outline">Write Review</a>
+        </div>
+      </div>
+    </article>
+  {% empty %}
+    <div class="empty-state">
+      <svg viewBox="0 0 24 24" class="empty-icon">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+      </svg>
+      <h3>No products found</h3>
+      <p>Try adjusting your filters or search terms to find more products.</p>
+    </div>
+  {% endfor %}
+</section>
+
+{% if is_paginated %}
+  <div class="reviews-pagination">
+    {% if page_obj.has_previous %}
+      <a href="?{{ qs }}{% if qs %}&{% endif %}page={{ page_obj.previous_page_number }}" class="btn-outline">← Previous</a>
+    {% endif %}
+    <span class="page-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+      <a href="?{{ qs }}{% if qs %}&{% endif %}page={{ page_obj.next_page_number }}" class="btn-outline">Next →</a>
+    {% endif %}
+  </div>
+{% endif %}
+{% endblock %}

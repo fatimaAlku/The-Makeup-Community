@@ -1,0 +1,104 @@
+{% extends "polls/base.html" %}
+{% load static %}
+{% block title %}Write a Review · {{ product.brand }} {{ product.name }}{% endblock %}
+
+{% block content %}
+<section class="card" style="padding:12px 16px; max-width:900px; margin:50px auto 40px;">
+  <header style="border-left:4px solid #ff4f8a; padding-left:10px; margin-bottom:10px;">
+    <h2 style="margin:0;">Write a Review for: <span style="color:#ff4f8a">{{ product.name }}</span></h2>
+  </header>
+
+  <form method="post" enctype="multipart/form-data" class="review-form">
+    {% csrf_token %}
+
+    <!-- Rating stars -->
+    <div class="form-row">
+      <label>Rating</label>
+      <div class="stars" data-target="#id_rating">
+        {% for i in "12345" %}
+          <button type="button" class="star-btn" data-val="{{ forloop.counter }}">★</button>
+        {% endfor %}
+      </div>
+      {{ form.rating }}  {# hidden by CSS via .rating-input #}
+    </div>
+
+    <div class="form-row">
+      <label>Review Title</label>
+      {{ form.title }}
+    </div>
+
+    <div class="form-row">
+      <label>Review Details</label>
+      {{ form.body }}
+    </div>
+
+    <!-- Skin Information -->
+    <div class="form-row" style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+      <div>
+        <label>Skin Type</label>
+        {{ form.skin_type }}
+      </div>
+      <div>
+        <label>Skin Tone</label>
+        {{ form.skin_tone }}
+      </div>
+    </div>
+
+    <!-- Media uploader (formset) -->
+    <fieldset class="media-box">
+      <legend>Upload Media</legend>
+      {{ formset.management_form }}
+      <div class="media-grid" style="display:flex; justify-content:center; margin-bottom:16px;">
+        {% with f=formset.forms.0 %}
+          <div class="media-item card" style="text-align:center;">
+            <div style="display:flex; gap:10px; align-items:center; justify-content:center;">
+              {{ f.file }}
+            </div>
+            {% if f.instance.pk %}
+              <label style="color:var(--muted)">{{ f.instance.file.name }}</label>
+            {% endif %}
+          </div>
+        {% endwith %}
+      </div>
+    </fieldset>
+
+    <div class="form-row verify card" style="padding:12px;">
+      <div>
+        {{ form.is_verified_purchase }} <label for="{{ form.is_verified_purchase.id_for_label }}">✓ Verified Purchase (upload receipt)</label>
+      </div>
+      <div>
+        {{ form.receipt }}
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <button class="primary" type="submit">Submit Review</button>
+    </div>
+    <div class="form-row" style="text-align:center;">
+      <a class="btn-cancel" href="{% url 'product-detail' product.pk %}">Cancel</a>
+    </div>
+  </form>
+</section>
+
+<script>
+  // Simple star rating
+  (function(){
+    const input = document.querySelector('.rating-input');
+    if (!input) return;
+    input.type = 'hidden';
+    const bar = document.querySelector('.stars');
+    const btns = bar ? bar.querySelectorAll('.star-btn') : [];
+    function paint(val){
+      btns.forEach((b,i)=> b.classList.toggle('on', i < val));
+    }
+    btns.forEach(b=>{
+      b.addEventListener('click', ()=>{
+        const v = parseInt(b.dataset.val, 10);
+        input.value = v; paint(v);
+      });
+    });
+    paint(parseInt(input.value||0,10));
+  })();
+</script>
+{% endblock %}

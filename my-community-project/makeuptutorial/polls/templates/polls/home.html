@@ -1,0 +1,35 @@
+{% extends "polls/base.html" %}
+{% block title %}Home · The Makeup Community{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">The Ultimate Makeup Review Platform</h1>
+    <p class="hero-subtitle">
+      Discover, review, and share honest opinions about makeup products. 
+      Join thousands of beauty enthusiasts sharing real experiences to help you find your perfect products.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-number">{{ kpi_products|default:"500+" }}</span>
+        <span class="stat-label">Products Reviewed</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">{{ kpi_reviews|default:"2,000+" }}</span>
+        <span class="stat-label">Honest Reviews</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">{{ kpi_users|default:"1,000+" }}</span>
+        <span class="stat-label">Beauty Enthusiasts</span>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="{% url 'products' %}" class="btn btn-primary btn-large">Browse Products</a>
+      <a href="{% url 'about' %}" class="btn btn-outline btn-large">Learn More</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

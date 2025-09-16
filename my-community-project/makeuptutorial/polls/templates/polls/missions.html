@@ -1,0 +1,113 @@
+{% extends "polls/base.html" %}
+{% block title %}Missions · The Makeup Community{% endblock %}
+
+{% block content %}
+<article class="wrap" style="padding-top:24px">
+  <!-- Page Header -->
+  <div class="missions-header" style="background: linear-gradient(135deg, #ffffff 0%, #fff5f5 50%, #ffe4e1 100%); border-radius: var(--radius-xl); padding: var(--space-2xl); margin-bottom: var(--space-2xl); text-align: center;">
+    <h1 style="margin: 0 0 var(--space-sm); font-size: 2.5rem; background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Makeup Missions</h1>
+    <p style="color: var(--muted); margin: 0; font-size: 1.2rem;">Complete challenges and unlock exclusive badges!</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-2xl);">
+    <!-- Main Content -->
+    <div class="missions-main">
+
+      <!-- Daily Missions -->
+      <div class="card" style="margin-bottom: var(--space-xl); padding: var(--space-lg);">
+        <h2 style="margin: 0 0 var(--space-lg); display: flex; align-items: center; gap: var(--space-sm);">
+           Daily Missions
+        </h2>
+        <div class="missions-grid">
+          {% for mission in daily_missions %}
+            <div class="mission-card {% if mission.completed %}completed{% endif %}" style="border: 1px solid var(--line-light); border-radius: var(--radius-md); padding: var(--space-md); margin-bottom: var(--space-md);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-sm);">
+                <div style="display: flex; align-items: center; gap: var(--space-sm);">
+               
+                  <div>
+                    <h3 style="margin: 0 0 var(--space-xs); font-size: 1.1rem;">{{ mission.title }}</h3>
+                    <p style="margin: 0; color: var(--muted); font-size: 0.9rem;">{{ mission.description }}</p>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <div style="font-weight: bold; color: var(--gradient-primary);">{{ mission.points }} pts</div>
+                  {% if mission.completed %}
+                    <span style="color: #10b981; font-weight: bold;">✓ Complete</span>
+                  {% endif %}
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-sm);">
+                <div style="flex: 1; height: 8px; background: var(--line-light); border-radius: 4px; overflow: hidden;">
+                  <div class="progress-bar" style="height: 100%; background: var(--gradient-primary);" data-width="{% widthratio mission.progress mission.target 100 %}"></div>
+                </div>
+                <span style="font-size: 0.9rem; color: var(--muted);">{{ mission.progress }}/{{ mission.target }}</span>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Weekly Missions -->
+      <div class="card" style="margin-bottom: var(--space-xl); padding: var(--space-lg);">
+        <h2 style="margin: 0 0 var(--space-lg); display: flex; align-items: center; gap: var(--space-sm);">
+           Weekly Missions
+        </h2>
+        <div class="missions-grid">
+          {% for mission in weekly_missions %}
+            <div class="mission-card {% if mission.completed %}completed{% endif %}" style="border: 1px solid var(--line-light); border-radius: var(--radius-md); padding: var(--space-md); margin-bottom: var(--space-md);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-sm);">
+                <div style="display: flex; align-items: center; gap: var(--space-sm);">
+                 
+                  <div>
+                    <h3 style="margin: 0 0 var(--space-xs); font-size: 1.1rem;">{{ mission.title }}</h3>
+                    <p style="margin: 0; color: var(--muted); font-size: 0.9rem;">{{ mission.description }}</p>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <div style="font-weight: bold; color: var(--gradient-primary);">{{ mission.points }} pts</div>
+                  {% if mission.completed %}
+                    <span style="color: #10b981; font-weight: bold;">✓ Complete</span>
+                  {% endif %}
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-sm);">
+                <div style="flex: 1; height: 8px; background: var(--line-light); border-radius: 4px; overflow: hidden;">
+                  <div class="progress-bar" style="height: 100%; background: var(--gradient-primary);" data-width="{% widthratio mission.progress mission.target 100 %}"></div>
+                </div>
+                <span style="font-size: 0.9rem; color: var(--muted);">{{ mission.progress }}/{{ mission.target }}</span>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div class="missions-sidebar">
+      <!-- Leaderboard -->
+      <div class="card" style="padding: var(--space-lg);">
+        <h2 style="margin: 0 0 var(--space-lg); display: flex; align-items: center; gap: var(--space-sm);">
+          <span>🏆</span> Leaderboard
+        </h2>
+        <div class="leaderboard">
+          {% for user in leaderboard %}
+            <div class="leaderboard-item {% if user.is_current_user %}current-user{% endif %}" style="display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-sm); border-radius: var(--radius-sm); margin-bottom: var(--space-xs);">
+              <div class="rank-badge rank-{{ user.rank }}" style="width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem;">
+                {% if user.crown %}👑{% else %}{{ user.rank }}{% endif %}
+              </div>
+              <div class="user-avatar" style="width: 40px; height: 40px; background: var(--gradient-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; font-size: 0.9rem;">
+                {{ user.avatar }}
+              </div>
+              <div style="flex: 1;">
+                <div style="font-weight: bold; font-size: 0.9rem;">{{ user.username }}</div>
+                <div style="color: var(--muted); font-size: 0.8rem;">{{ user.points }} points</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+{% endblock %}

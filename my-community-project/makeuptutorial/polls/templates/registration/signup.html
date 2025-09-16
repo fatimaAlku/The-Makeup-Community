@@ -1,0 +1,38 @@
+{% extends "polls/base.html" %}
+{% block title %}Create Account · The Makeup Community{% endblock %}
+{% block content %}
+<div class="auth-page">
+<section class="auth-card">
+  <h1>Create your account</h1>
+
+  {% if form.errors or form.non_field_errors %}
+    <div class="auth-error">
+      {% for err in form.non_field_errors %}<div>{{ err }}</div>{% endfor %}
+      {% for field in form %}{% for err in field.errors %}<div>{{ err }}</div>{% endfor %}{% endfor %}
+    </div>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.GET.next }}">
+    <div class="form-row">
+      <label for="{{ form.username.id_for_label }}">Username</label>
+      {{ form.username }}
+    </div>
+    <div class="form-row">
+      <label for="{{ form.password1.id_for_label }}">Password</label>
+      {{ form.password1 }}
+    </div>
+    <div class="form-row">
+      <label for="{{ form.password2.id_for_label }}">Confirm password</label>
+      {{ form.password2 }}
+    </div>
+    <button class="primary" type="submit">Create account</button>
+    <p class="muted" style="margin-top:10px">
+      Already have an account?
+      <a href="{% url 'login' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">Sign in</a>
+    </p>
+  </form>
+</section>
+</div>
+{% endblock %}

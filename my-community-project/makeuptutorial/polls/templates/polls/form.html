@@ -1,0 +1,47 @@
+{% extends "polls/base.html" %}
+{% block content %}
+<section class="card" style="max-width:720px; margin:40px auto; padding:16px; margin-top: 62px;">
+  <header style="border-left:4px solid #ff4f8a; padding-left:10px; margin-bottom:12px; ">
+    <h2 style="margin:0;">Edit Review</h2>
+  </header>
+  <form method="post" class="review-form">{% csrf_token %}
+    <div class="form-row">
+      {{ form.title.label_tag }}
+      {{ form.title }}
+    </div>
+    <div class="form-row">
+      {{ form.body.label_tag }}
+      {{ form.body }}
+    </div>
+    <div class="form-row">
+      <label>Rating</label>
+      <div class="stars">
+        {% for i in "12345" %}
+          <button type="button" class="star-btn" data-val="{{ forloop.counter }}">★</button>
+        {% endfor %}
+      </div>
+      {{ form.rating }}
+    </div>
+    <div class="form-row">
+      <button class="primary" type="submit">Save</button>
+    </div>
+    <div class="form-row" style="text-align:center;">
+      <a class="btn-cancel" href="javascript:history.back()">Cancel</a>
+    </div>
+  </form>
+</section>
+<script>
+  (function(){
+    const input = document.querySelector('input[name="rating"]');
+    if (!input) return;
+    input.classList.add('rating-input');
+    const bar = document.currentScript.previousElementSibling.querySelector('.stars');
+    const btns = bar ? bar.querySelectorAll('.star-btn') : [];
+    function paint(val){ btns.forEach((b,i)=> b.classList.toggle('on', i < val)); }
+    btns.forEach(b=>{
+      b.addEventListener('click', ()=>{ const v = parseInt(b.dataset.val,10); input.value = v; paint(v); });
+    });
+    paint(parseInt(input.value||0,10));
+  })();
+</script>
+{% endblock %}

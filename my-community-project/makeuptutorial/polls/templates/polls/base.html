@@ -1,0 +1,42 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}The Makeup Community{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body class="bw">
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="{% url 'product-list' %}">
+        <span class="brand-icon">💄</span>
+        The Makeup Community
+      </a>
+      <nav class="topnav">
+        <a href="{% url 'product-list' %}" class="{% if request.resolver_match.url_name == 'product-list' %}active{% endif %}">Home</a>
+        <a href="{% url 'products' %}" class="{% if request.resolver_match.url_name == 'products' %}active{% endif %}">Products</a>    
+        <a href="{% url 'trends' %}" class="{% if request.resolver_match.url_name == 'trends' %}active{% endif %}">Trends</a>
+        <a href="{% url 'missions' %}" class="{% if request.resolver_match.url_name == 'missions' %}active{% endif %}">Missions</a>
+        <a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
+      </nav>
+  <div class="auth">
+  {% if user.is_authenticated %}
+    <a class="btn-link" href="{% url 'user-profile' %}">Profile</a>
+    <form method="post" action="{% url 'logout' %}" style="display:inline; margin-left: var(--space-sm);">
+      {% csrf_token %}
+      <button type="submit" class="btn-link" style="background: none; border: none; padding: 0; font: inherit; cursor: pointer; text-decoration: none;">Logout</button>
+    </form>
+  {% else %}
+    <a class="btn-link" href="{% url 'login' %}">Login</a>
+    <a class="chip chip-primary" href="{% url 'signup' %}">Sign up</a>
+  {% endif %}
+</div>
+
+    </div>
+  </header>
+
+  <main class="wrap">{% block content %}{% endblock %}</main>
+</body>
+</html>
