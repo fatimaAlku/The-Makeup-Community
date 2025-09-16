@@ -67,19 +67,12 @@
           <div class="rating-section">
             <div class="stars">
               {% for i in "12345" %}
-                <svg viewBox="0 0 24 24" class="star {% if forloop.counter <= p.avg_rating|floatformat:0 %}filled{% endif %}">
+                <svg viewBox="0 0 24 24" class="star {% if forloop.counter <= p.avg_rating %}filled{% endif %}">
                   <path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/>
                 </svg>
               {% endfor %}
             </div>
             <span class="rating-text">{{ p.avg_rating|default:"No rating"|floatformat:1 }}</span>
-          </div>
-          
-          <div class="review-count">
-            <svg viewBox="0 0 24 24" class="review-icon">
-              <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
-            </svg>
-            <span>{{ p.reviews_count|default:0 }} review{{ p.reviews_count|default:0|pluralize }}</span>
           </div>
         </div>
         
