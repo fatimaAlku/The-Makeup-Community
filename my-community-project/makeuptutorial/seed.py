@@ -325,53 +325,68 @@ PRODUCTS = [
     },
 ]
 
-REVIEW_SNIPPETS = [
-    # Positive Reviews
+POSITIVE_SNIPPETS = [
     "Absolutely love this! The formula is incredible and lasts all day.",
     "This is my holy grail product. Perfect for my skin type.",
     "Amazing pigmentation and blendability. Worth every penny!",
     "I've been using this for months and it's still my go-to.",
     "The color payoff is stunning and it doesn't budge all day.",
     "Perfect for my oily skin - no creasing or fading.",
-    "This gives me the perfect natural look I've been searching for.",
     "The texture is so smooth and applies like a dream.",
-    "I get so many compliments when I wear this!",
-    "This product has completely changed my makeup routine.",
-    "The staying power is incredible - 12+ hours easily.",
     "Love how buildable this is - can go from subtle to dramatic.",
-    "This is exactly what I was looking for. Highly recommend!",
     "The finish is flawless and looks expensive.",
     "I've tried so many similar products and this is the best.",
-    "Perfect for beginners - so easy to work with.",
-    "This gives me that Instagram-worthy glow every time.",
-    "The packaging is beautiful and the product inside is even better.",
-    "I can't believe how good this looks on my skin tone.",
-    "This has become a staple in my everyday routine.",
-    
-    # Mixed Reviews
+]
+
+MIXED_SNIPPETS = [
     "Good product overall, but the price is a bit steep.",
     "Nice formula, but the shade range could be better.",
     "Works well, though it takes some practice to apply correctly.",
-    "Decent quality, but there are cheaper alternatives that work just as well.",
     "I like it, but it's not quite what I expected from the reviews.",
-    "Good for special occasions, but too heavy for everyday wear.",
     "Nice color, but the staying power could be better.",
-    "It's okay, but I probably won't repurchase.",
     "Good product, but the packaging could be more travel-friendly.",
-    "Decent quality, but the application takes longer than I'd like.",
-    
-    # Critical Reviews
+]
+
+CRITICAL_SNIPPETS = [
     "Not worth the hype. Doesn't work well with my skin type.",
     "The formula is too thick and hard to blend.",
     "Color doesn't match what I expected from the swatches.",
     "This product doesn't last as long as advertised.",
     "Too expensive for what you get. Disappointed.",
     "The packaging broke after just a few uses.",
-    "This caused a reaction on my sensitive skin.",
-    "The color payoff is much weaker than expected.",
-    "Not suitable for my skin tone despite the claims.",
-    "This product doesn't work well in humid weather.",
 ]
+
+TITLES_BY_RATING = {
+    5: [
+        "Absolutely perfect!", "Holy grail product!", "Worth every penny!",
+        "Life-changing!", "My new favorite!", "Incredible quality!",
+    ],
+    4: [
+        "Really great product", "Solid choice", "Would recommend", "Good quality",
+    ],
+    3: [
+        "It's okay", "Decent product", "Average quality", "Mixed feelings",
+    ],
+    2: [
+        "Disappointed", "Not what I expected", "Below average", "Not great",
+    ],
+    1: [
+        "Terrible", "Waste of money", "Awful quality", "Regret purchase",
+    ],
+}
+
+def pick_snippet_for_rating(r: int) -> str:
+    if r >= 5:
+        pool = POSITIVE_SNIPPETS
+    elif r == 4:
+        pool = POSITIVE_SNIPPETS + MIXED_SNIPPETS
+    elif r == 3:
+        pool = MIXED_SNIPPETS
+    elif r == 2:
+        pool = MIXED_SNIPPETS + CRITICAL_SNIPPETS
+    else:
+        pool = CRITICAL_SNIPPETS
+    return random.choice(pool)
 
 def create_users():
     print("→ Seeding users…")
@@ -427,29 +442,10 @@ def create_reviews():
         for user in users:
             if Review.objects.filter(user=user, product=prod).exists():
                 continue
-            rating = random.randint(1, 5)  # full range of ratings for realistic reviews
-            title = random.choice([
-                # 5-star titles
-                "Absolutely perfect!", "Holy grail product!", "Worth every penny!", "Life-changing!", "Perfect match!",
-                "My new favorite!", "Incredible quality!", "Flawless finish!", "Amazing results!", "Love it!",
-                
-                # 4-star titles
-                "Really great product", "Solid choice", "Pretty impressed", "Would recommend", "Good quality",
-                "Nice formula", "Works well", "Happy with purchase", "Good value", "Satisfied",
-                
-                # 3-star titles
-                "It's okay", "Decent product", "Not bad", "Average quality", "Could be better",
-                "Mixed feelings", "So-so", "Alright", "Fair", "Meh",
-                
-                # 2-star titles
-                "Disappointed", "Not what I expected", "Could be improved", "Below average", "Not great",
-                "Had issues", "Not impressed", "Won't repurchase", "Overpriced", "Not worth it",
-                
-                # 1-star titles
-                "Terrible", "Waste of money", "Awful quality", "Don't buy", "Regret purchase",
-                "Complete fail", "Horrible", "Worst product", "Avoid this", "Big mistake"
-            ])
-            body = random.choice(REVIEW_SNIPPETS)
+            # Bias ratings around 3–4 to look more realistic overall
+            rating = random.choices([1,2,3,4,5], weights=[8,14,28,32,18], k=1)[0]
+            title = random.choice(TITLES_BY_RATING[rating])
+            body = pick_snippet_for_rating(rating)
             created_at = timezone.now() - timedelta(days=random.randint(0, 60))
             r = Review.objects.create(
                 user=user, product=prod, title=title, body=body,
@@ -459,10 +455,26 @@ def create_reviews():
             print(f"  ✍️  {user.username} → {prod.name} ({rating}/5)")
     print("  done.")
 
+def fix_existing_reviews():
+    print("→ Normalizing existing reviews…")
+    count = 0
+    for r in Review.objects.all().only("id", "rating", "title", "body"):
+        # Keep the stored star rating, refresh title/body to match tone
+        rating = int(max(1, min(5, r.rating or 3)))
+        new_title = random.choice(TITLES_BY_RATING.get(rating, TITLES_BY_RATING[3]))
+        new_body = pick_snippet_for_rating(rating)
+        if r.title != new_title or r.body != new_body:
+            r.title = new_title
+            r.body = new_body
+            r.save(update_fields=["title", "body"])
+            count += 1
+    print(f"  🔄 Updated {count} existing reviews")
+
 def run():
     create_users()
     create_products()
     create_reviews()
+    fix_existing_reviews()
     print("\n✅ Seeding complete.")
 
 if __name__ == "__main__":
