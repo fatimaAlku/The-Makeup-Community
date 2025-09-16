@@ -244,6 +244,78 @@ PRODUCTS = [
         "price": 32,
         "image_url": "/static/img/products/Fenty Beauty — Pro Filt'r Instant Retouch Setting Powder.jpg",
     },
+    
+    # --- New additions ---
+    {
+        "brand": "Kylie Cosmetics",
+        "name": "Matte Liquid Lipstick “Candy K”",
+        "category": "lipstick",
+        "price": 18,
+        "image_url": "/static/img/products/Kylie Cosmetics — Matte Liquid Lipstick “Candy K”.jpg",
+    },
+    {
+        "brand": "Kylie Cosmetics",
+        "name": "Velvet Lip Kit “Bare”",
+        "category": "lipstick",
+        "price": 29,
+        "image_url": "/static/img/products/Kylie Cosmetics — Velvet Lip Kit “Bare”.jpg",
+    },
+    {
+        "brand": "Kylie Cosmetics",
+        "name": "Kylash Volume Mascara",
+        "category": "mascara",
+        "price": 24,
+        "image_url": "/static/img/products/Kylie Cosmetics — Kylash Volume Mascara.webp",
+    },
+    {
+        "brand": "Kylie Cosmetics",
+        "name": "Pressed Blush Powder “Baddie on the Block”",
+        "category": "blush",
+        "price": 20,
+        "image_url": "/static/img/products/Kylie Cosmetics — Pressed Blush Powder “Baddie on the Block”.avif",
+    },
+    {
+        "brand": "Huda Beauty",
+        "name": "Power Bullet Matte Lipstick “Interview”",
+        "category": "lipstick",
+        "price": 27,
+        "image_url": "/static/img/products/Huda Beauty — Power Bullet Matte Lipstick “Interview”.jpg",
+    },
+    {
+        "brand": "Huda Beauty",
+        "name": "FauxFilter Luminous Matte Foundation",
+        "category": "foundation",
+        "price": 42,
+        "image_url": "/static/img/products/Huda Beauty — FauxFilter Luminous Matte Foundation.jpg",
+    },
+    {
+        "brand": "Huda Beauty",
+        "name": "Easy Bake Loose Baking & Setting Powder",
+        "category": "powder",
+        "price": 35,
+        "image_url": "/static/img/products/Huda Beauty — Easy Bake Loose Baking & Setting Powder.jpg",
+    },
+    {
+        "brand": "Huda Beauty",
+        "name": "Legit Lashes Double-Ended Mascara",
+        "category": "mascara",
+        "price": 27,
+        "image_url": "/static/img/products/Huda Beauty — Legit Lashes Double-Ended Mascara.webp",
+    },
+    {
+        "brand": "Summer Fridays",
+        "name": "Lip Butter Balm “Vanilla”",
+        "category": "skincare",
+        "price": 24,
+        "image_url": "/static/img/products/Summer Fridays — Lip Butter Balm “Vanilla”.webp",
+    },
+    {
+        "brand": "Summer Fridays",
+        "name": "Jet Lag Mask",
+        "category": "skincare",
+        "price": 49,
+        "image_url": "/static/img/products/Summer Fridays — Jet Lag Mask.jpg",
+    },
 ]
 
 REVIEW_SNIPPETS = [
