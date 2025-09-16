@@ -318,6 +318,7 @@ class ReviewHelpfulnessView(LoginRequiredMixin, generic.View):
         
         return redirect('product-detail', pk=review.product.pk)
 
+
 # Wear Test Controls
 
 # Enhanced Product Detail with Review Statistics

@@ -110,6 +110,7 @@ class ReviewHelpfulness(models.Model):
     def __str__(self):
         return f"{'Helpful' if self.is_helpful else 'Not helpful'} vote by {self.user.username}"
 
+# (ReviewLike removed per request)
 class WearTest(models.Model):
     review = models.OneToOneField(Review, on_delete=models.CASCADE, related_name="wear_test")
     start_time = models.DateTimeField(auto_now_add=True)
