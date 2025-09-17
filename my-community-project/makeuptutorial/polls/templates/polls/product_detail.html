@@ -57,7 +57,6 @@
           {% if user_has_reviewed %}
             <!-- Single entry point: Write Review goes to edit when a review already exists -->
             <a class="primary" href="{% url 'review-update' user_review.pk %}">Write Review</a>
-            <a class="btn-link" href="{% url 'review-delete' user_review.pk %}" style="color:#ff6b6b">Delete Your Review</a>
           {% else %}
             <a class="primary" href="{% url 'review-create' object.pk %}">Write Review</a>
           {% endif %}
@@ -159,4 +158,5 @@
   </section>
 </article>
 {% endblock %}
+
 
