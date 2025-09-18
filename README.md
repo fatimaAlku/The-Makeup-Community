@@ -14,7 +14,13 @@ I built this to create a reliable place to research makeup with genuine communit
 
 ## Getting Started
 - Deployed app: [http://127.0.0.1:8000/](http://127.0.0.1:8000/) (local dev)
-- Planning materials: Add your planning doc link here (wireframes/user stories)
+- Planning materials:
+
+trello board: https://trello.com/b/qh6fYqqR/the-makeup-community
+
+wireframe: https://www.canva.com/design/DAGyxIgZfVQ/CwO8MDOgMBjCqdVS8bbmrA/edit
+
+ERD: https://www.canva.com/design/DAGyxd2i9BI/ATi3kDBJhsIWaCCQcfDXwQ/edit
 
 Local setup:
 ```bash
